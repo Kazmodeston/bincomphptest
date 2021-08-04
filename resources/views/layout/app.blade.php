@@ -13,7 +13,9 @@
 
     @include('layout.header')
 
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div>
 
     @include('layout.scripts')
 </body>
