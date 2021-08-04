@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PollingUnitsController;
+use App\Http\Controllers\StatesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('home');
-});
+}); */
+
+Route::get("/", [PollingUnitsController::class, "index"]);
+Route::get("/pulling", [PollingUnitsController::class, "getpullingUnitResults"]);
+Route::get("/lga-pulling-result", [PollingUnitsController::class, "getLgaPollingResult"]);
+Route::get("/get-all-lga", [PollingUnitsController::class, "getAllLga"]);
