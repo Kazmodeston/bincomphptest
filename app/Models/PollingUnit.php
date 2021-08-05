@@ -12,6 +12,16 @@ class PollingUnit extends Model
 
     protected $table = "polling_unit";
 
+    protected $fillable = [
+            "polling_unit_id",
+            "ward_id",
+            "lga_id",
+            "uniquewardid",
+            "polling_unit_name"
+    ];
+
+    public $timestamps = false;
+
     public function pullingResults()
     {
         return $this->hasMany(AnnouncedPullingResult::class, "polling_unit_uniqueid", "uniqueid")->sum("party_score");
