@@ -12,17 +12,7 @@ class PollingUnitsController extends Controller
 {
     public function index()
     {
-        // $results = PollingUnit::all();
         $results = PollingUnit::where("lga_id","!=", 0)->get();
-        // $results = PollingUnit::with("pullingResults")->get();
-        
-        // return Response(["message" => $data], 200);
-        return view('home', ["results" => $results]);
-    }
-
-    public function getPullingUnits()
-    {
-        $results = Lga::where("lga_id","!=", 0)->get();
         return view('home', ["results" => $results]);
     }
 
