@@ -8,7 +8,13 @@
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                     
-                    <form action="{{url('/add-result')}}" method="POST">
+                    @if (session('status'))
+                        <div class="alert {{ session('color') }}">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                
+                    <form action="{{url('/add-result')}}" method="POST" id="add_result">
                         @csrf
 
                         <div class="form-group">
@@ -19,7 +25,10 @@
                                     <option value="{{$result->lga_id}}">{{$result->lga_name}}</option>
                                 @endforeach
                             </select>
-                            <span class="error"></span>
+                            @error('lga')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
+                            
                         </div>
 
                         <div class="form-group">
@@ -27,33 +36,46 @@
                             <select class="form-control" name="ward" id="ward">
                                 <option value="">Choose Ward</option>
                             </select>
-                            <span class="error"></span>
+                            @error('ward')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="pullingUnit">Pulling Unit</label>
-                            <input type="text" class="form-control" id="pullingUnit" placeholder="enter pulling unit">
-                            <span class="error"></span>
+                            <input type="text" class="form-control" id="pullingUnit" name="pullingUnit" placeholder="enter pulling unit" value="{{ old('pullingUnit') }}" >
+                            @error('pullingUnit')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="Ward">party</label>
+                            <label for="Party">Party</label>
                             <select class="form-control" name="party" id="party">
                                 <option value="">Choose Ward</option>
+                                @foreach ($parties as $party)
+                                    <option value="{{$party->partyid}}">{{$party->partyname}}</option>
+                                @endforeach
                             </select>
-                            <span class="error"></span>
+                            @error('party')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="pullingUnit">Party Scores</label>
-                            <input type="text" class="form-control" id="score" placeholder="enter Party Scores">
-                            <span class="error"></span>
+                            <label for="score">Party Scores</label>
+                            <input type="text" class="form-control" name="score" id="score" placeholder="enter Party Scores" value="{{ old('score') }}">
+                            @error('score')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="pullingUnit">Entered by</label>
-                            <input type="text" class="form-control" id="enter_by" placeholder="enter Party Scores">
-                            <span class="error"></span>
+                            <label for="enter_by">Entered by</label>
+                            <input type="text" class="form-control" id="enter_by" name="scoreBy" placeholder="...Score by" value="{{ old('scoreBy') }}">
+                            @error('scoreBy')
+                                <span class="error text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
         
@@ -117,6 +139,33 @@
 
             
         });
+
+
+
+        // For submiting form
+        /* $("#add_result" ).submit(function() {
+            const selector = $(this).val();
+            
+            $.ajax({
+                        url: "add-result",
+                        type: "POST", //send it through get method
+                        data: { 
+                           data : selector
+                        },
+                        success: function(response) {
+                            console.log(response)                            
+                            
+
+                        },
+                        error: function(xhr) {
+                            //Do Something to handle error
+                            console.log(xhr)
+                        }
+                    });
+
+
+            
+        }); */
 
     });
 </script>
