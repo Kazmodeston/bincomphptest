@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lga;
 use App\Models\PollingUnit;
+use App\Models\Ward;
 use Illuminate\Http\Request;
 
 class ResultsController extends Controller
@@ -45,4 +46,12 @@ class ResultsController extends Controller
         $results = PollingUnit::where("lga_id","!=", 0)->get();
         return view('addResults', ["results" => $results]);
     }
+
+    public function  getWardFromLGA(Request $request)
+    {
+        $results = Ward::where("lga_id", $request->lga)->get();
+        return $results;
+    }
+
+    
 }
