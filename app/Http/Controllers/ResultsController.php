@@ -39,4 +39,10 @@ class ResultsController extends Controller
     {
         //
     }
+
+    public function getPullingUnits()
+    {
+        $results = PollingUnit::where("lga_id","!=", 0)->get();
+        return view('addResults', ["results" => $results]);
+    }
 }
