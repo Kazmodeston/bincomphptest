@@ -15,15 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('home');
-    return redirect('add-result')->with(['status' => 'Record saved successfully!', 'color' => 'alert-danger']);
-});
-// exit;
-// Route::get("/", [PollingUnitsController::class, "index"]);
+
+Route::get("/", [PollingUnitsController::class, "index"]);
 Route::get("/pulling", [PollingUnitsController::class, "getpullingUnitResults"]);
 Route::get("/lga-pulling-result", [PollingUnitsController::class, "getLgaPollingResult"]);
 Route::get("/get-all-lga", [PollingUnitsController::class, "getAllLga"]);
 Route::get("/add-result", [ResultsController::class, "index"]);
 Route::post("/add-result", [ResultsController::class, "store"]);
 Route::get("/get-ward", [ResultsController::class, "getWardFromLGA"]);
+
